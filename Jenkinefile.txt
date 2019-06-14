@@ -1,41 +1,41 @@
-pipeline{
+pipeline {
       agent any 
 	       stages {
-		         stage('one'){
-				         steps{
+		         stage('one') {
+				         steps {
 						   echo 'hi,this is sumit 1st pipeline project'
 						 }
 				 }
-				 stage('two'){
-				        steps{
+				 stage('two') {
+				        steps {
 						    input('Do you want to proceed ?')
 						 }
 				 }
-				 stage('three'){
+				 stage('three') {
 				     when {
 					        not {
 							        branch 'master'
 							} 
 					 }
-					 steps{
+					 steps {
 					     echo "hello"
 					 }
 				 }
-		        stage('four'){
-				               parallel{
-							         stage('unit test'){
-									              steps{
+		        stage('four') {
+				               parallel {
+							         stage('unit test') {
+									              steps {
 												      echo 'running the unit test'
 												  }
 									 }
-									 stage('Integration test'){
-									        agent{
-											   docker{
+									 stage('Integration test')   {
+									        agent {
+											   docker {
 											       reuseNode false
 												   image 'ubuntu'
 											   }
 											}
-											steps{
+											steps {
 											   echo 'Running the integration test'
 											}
 									 }
